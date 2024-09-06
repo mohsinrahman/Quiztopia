@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import { useState, createContext } from 'react';
+import CreateAccount from './components/Createaccount'
+import Login from './components/Login'
+import Createquiz from "./components/Createquiz";
+import CreateQAmap from './components/createQAmap';
+import Showallquiz from './components/Showallquiz';
+
+//import AddQA from './components/AddQA'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+const QuizContext = createContext();
+const GetQuiznameContext = createContext();
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+ 
+  const [quizname, setQuizname] = useState('');
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+     <QuizContext.Provider value={quizname}>
+        <GetQuiznameContext.Provider value={setQuizname}>
+      <Routes>
+      <Route path="/" element={<CreateAccount/>}></Route> 
+      <Route path="/login" element={<Login/>}></Route> 
+      <Route path="/createquiz" element={<Createquiz/>}></Route> 
+      <Route path="/createQAmap" element={<CreateQAmap/>}></Route> 
+      <Route path="/showallquiz" element={<Showallquiz/>}></Route> 
+      </Routes>
+      </GetQuiznameContext.Provider>
+      </QuizContext.Provider>
+    </BrowserRouter>
+    
   )
 }
-
+export { QuizContext, GetQuiznameContext };
 export default App
