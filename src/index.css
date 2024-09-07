@@ -63,3 +63,28 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+ul{
+  list-style-type: none;
+ 
+}
+li{
+  border: 1px solid #1a1a1a;
+ width : 200px;
+ background: #f9f9f9;
+ margin:5px;
+}
+.quizUsername{
+  display: block;
+  color:#747bff;
+
+}
+
+.quizId{
+  display: block;
+  
+}

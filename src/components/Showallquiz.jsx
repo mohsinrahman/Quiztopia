@@ -19,9 +19,10 @@ export default function Showallquiz() {
                     });
                     const datalist = await response.json();
                     setData(datalist);
-                    if(data){
-                        console.log(data);  
-                    }
+                    
+                   
+                       
+                    
                          
                 
                 } catch (error) {
@@ -31,23 +32,31 @@ export default function Showallquiz() {
         };
         checkToken();
         
-        
-    });
-    if(data) {     
+    }, []);
+    
+    console.log(data.quizzes)
   return (
     <>
-    <div>Showallquiz</div>
-    <ul>
-  {
-    data.quizzes.map((item, index) => {
-     
-     <li key={index}>{item.username}</li>
-    })  
-}
+    <h2>Show Quiz</h2>
+    <ul className='grid-container'>
+  
+    { 
+        data.quizzes?.map((item,index) => (
+          <li key={index}>
+            <span className='quizUsername'>
+            Username: {item.username}
+            </span>
+            <span className='quizId'>
+            ID: {item.quizId}
+            </span>
+          </li>
+        ))}
+
+
     </ul>
     </>
     
     
   )
-} 
+
 }
