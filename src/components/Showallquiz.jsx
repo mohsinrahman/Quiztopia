@@ -1,7 +1,10 @@
 import React  from 'react'
 import { useEffect, useState } from 'react';
+import ShowMap from './ShowMap';
+import { useNavigate } from "react-router-dom";
 
 export default function Showallquiz() {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     useEffect(() => {
         const checkToken = async () => {
@@ -19,12 +22,7 @@ export default function Showallquiz() {
                     });
                     const datalist = await response.json();
                     setData(datalist);
-                    
-                   
-                       
-                    
                          
-                
                 } catch (error) {
                     console.error(error);
                 }
@@ -34,7 +32,6 @@ export default function Showallquiz() {
         
     }, []);
     
-    console.log(data.quizzes)
   return (
     <>
     <h2>Show Quiz</h2>
@@ -42,7 +39,7 @@ export default function Showallquiz() {
   
     { 
         data.quizzes?.map((item,index) => (
-          <li key={index}>
+          <li key={index} onClick = {() =>  navigate('/showMap',{state:item})} >
             <span className='quizUsername'>
             Username: {item.username}
             </span>

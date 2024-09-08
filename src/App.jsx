@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Createquiz from "./components/Createquiz";
 import CreateQAmap from './components/createQAmap';
 import Showallquiz from './components/Showallquiz';
+import ShowMap from './components/ShowMap';
 
 //import AddQA from './components/AddQA'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -26,6 +27,7 @@ function App() {
       <Route path="/createquiz" element={<Createquiz/>}></Route> 
       <Route path="/createQAmap" element={<CreateQAmap/>}></Route> 
       <Route path="/showallquiz" element={<Showallquiz/>}></Route> 
+      <Route path="/showMap" element={<ShowMap/>}></Route>
       </Routes>
       </GetQuiznameContext.Provider>
       </QuizContext.Provider>
