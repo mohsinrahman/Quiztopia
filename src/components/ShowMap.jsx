@@ -16,11 +16,8 @@ export default function ShowMap() {
           // när vi loggar in ska vi få tillbaka en token
           useEffect(() => {
   
-           
-            const userData = { name:"quizV", question:"question", answer:answer, location: {
-                longitude: currentLng,
-                latitude: currentLat
-            } };
+          
+            const userData = { message:location.state.quizId }; 
             console.log('here we are');
             let token = '';
             token = sessionStorage.getItem('token') || '';
@@ -79,33 +76,41 @@ export default function ShowMap() {
                 '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             })
             .addTo(map);
-    
-          const marker = leaflet
-            .marker([position?.latitude, position?.longitude])
+            
+         console.log(location.state.questions);
+        location.state.questions.map((qa,index)=> {
+            console.log(qa.location.latitude , qa.location.longitude); 
+          /* const marker = leaflet
+            .marker([qa.location.latitude, qa.location.longitude])
             .addTo(map);
-    
-          marker.bindPopup('Detta är Jensen YH');
-    
-          map.on('click', (event) => {
-            console.log(event);
-            console.log(event.latlng.lat);
-            console.log(event.latlng.lng);
-            setCurrentLat(event.latlng.lat);
-            setCurrentLng(event.latlng.lng);
+          marker.bindPopup(qa.question); */
+        //})
+       //   map.on('click', (event) => { 
+           /*  setCurrentLat(qa.location.latitude);
+            setCurrentLng(qa.location.longitude);
             const clat = currentLat;
-            const clng = currentLng
-            const marker = leaflet
-              .marker([ event.latlng.lat ,event.latlng.lng ])
-              .addTo(map);
-              console.log(marker._latlng.lat)
-          });
-          console.log(marker._latlng.lat)
-          marker.on('click', () => {
-            console.log('Du klickade på Jensen YH');
-          });
+            const clng = currentLng */
+             /* const marker = leaflet
+              .marker([ qa.location.latitude ,qa.location.longitude ])
+              .addTo(map);  
+              marker.bindPopup(qa.question); */ 
+              var markerLocation = new L.LatLng(qa.location.latitude, qa.location.longitude);
+              var marker = new L.Marker(markerLocation);
+              map.addLayer(marker);
+          
+              marker.bindPopup(qa.question);
+         // }); 
+         /*  marker.on('click', () => {
+            console.log(location.state.quizId);
+          }); */
+        })
         }
+    
       }, [map]);
   return (
-    <div><section id='map'></section></div>
+    <div>
+    <h1>Map</h1>
+    <section id='map'></section>
+    </div>
   )
 }
