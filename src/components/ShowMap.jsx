@@ -43,7 +43,7 @@ export default function ShowMap() {
             }
         })
     
-      function getPosition() {
+       function getPosition() {
         if ('geolocation' in navigator && !position?.latitude) {
           navigator.geolocation.getCurrentPosition((position) => {
             setPosition(position.coords);
@@ -55,9 +55,9 @@ export default function ShowMap() {
         if (!position?.latitude) {
           getPosition();
         }
-      }, []);
+      }, []); 
     
-      useEffect(() => {
+       useEffect(() => {
         if (position?.latitude && !map) {
           const myMap = leaflet
             .map('map')
@@ -65,9 +65,9 @@ export default function ShowMap() {
     
           setMap(myMap);
         }
-      }, [position]);
+      }, [position]); 
     
-      useEffect(() => {
+       useEffect(() => {
         if (map && position) {
           leaflet
             .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -79,34 +79,34 @@ export default function ShowMap() {
             
          console.log(location.state.questions);
         location.state.questions.map((qa,index)=> {
-            console.log(qa.location.latitude , qa.location.longitude); 
-          /* const marker = leaflet
+            console.log(qa.location.latitude , qa.location.longitude);  
+          const marker = leaflet
             .marker([qa.location.latitude, qa.location.longitude])
             .addTo(map);
-          marker.bindPopup(qa.question); */
-        //})
-       //   map.on('click', (event) => { 
-           /*  setCurrentLat(qa.location.latitude);
+          marker.bindPopup(qa.question); 
+        })
+          map.on('click', (event) => { 
+             setCurrentLat(qa.location.latitude);
             setCurrentLng(qa.location.longitude);
             const clat = currentLat;
-            const clng = currentLng */
-             /* const marker = leaflet
+            const clng = currentLng 
+              const marker = leaflet
               .marker([ qa.location.latitude ,qa.location.longitude ])
               .addTo(map);  
-              marker.bindPopup(qa.question); */ 
-              var markerLocation = new L.LatLng(qa.location.latitude, qa.location.longitude);
+              marker.bindPopup(qa.question); 
+  /*             var markerLocation = new L.LatLng(qa.location.latitude, qa.location.longitude);
               var marker = new L.Marker(markerLocation);
               map.addLayer(marker);
           
-              marker.bindPopup(qa.question);
-         // }); 
-         /*  marker.on('click', () => {
+              marker.bindPopup(qa.question); */ 
+          }); 
+       /*     marker.on('click', () => {
             console.log(location.state.quizId);
-          }); */
-        })
+          });  */
+         
         }
     
-      }, [map]);
+      }, [map]); 
   return (
     <div>
     <h1>Map</h1>
