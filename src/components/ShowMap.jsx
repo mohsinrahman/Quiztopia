@@ -78,31 +78,23 @@ export default function ShowMap() {
             .addTo(map);
             
          console.log(location.state.questions);
-        location.state.questions.map((qa,index)=> {
-            console.log(qa.location.latitude , qa.location.longitude);  
-          const marker = leaflet
-            .marker([qa.location.latitude, qa.location.longitude])
-            .addTo(map);
-          marker.bindPopup(qa.question); 
-        })
-          map.on('click', (event) => { 
-             setCurrentLat(qa.location.latitude);
-            setCurrentLng(qa.location.longitude);
-            const clat = currentLat;
-            const clng = currentLng 
-              const marker = leaflet
-              .marker([ qa.location.latitude ,qa.location.longitude ])
-              .addTo(map);  
-              marker.bindPopup(qa.question); 
-  /*             var markerLocation = new L.LatLng(qa.location.latitude, qa.location.longitude);
-              var marker = new L.Marker(markerLocation);
-              map.addLayer(marker);
-          
-              marker.bindPopup(qa.question); */ 
-          }); 
-       /*     marker.on('click', () => {
-            console.log(location.state.quizId);
-          });  */
+
+             //Loop through the markers array
+             for (var i=0; i<location.state.questions.length; i++) {
+           
+               console.log(location.state.questions[i].location.longitude)
+               var lon = location.state.questions[i].location.longitude;
+              var lat = location.state.questions[i].location.latitude;
+              var popupText = location.state.questions[i].question;
+              
+               var markerLocation = new L.LatLng(lat, lon);
+               var marker = new L.Marker(markerLocation);
+               map.addLayer(marker);
+           
+               marker.bindPopup(popupText); 
+           
+           }
+
          
         }
     
